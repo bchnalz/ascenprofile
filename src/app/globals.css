@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- Token warna ----------
+   Hijau zamrud + kuningan: diambil dari ornamen masjid dan papan nama sekolah Islam,
+   bukan krem/terakota. Mode gelap memakai hitam kehijauan, bukan abu netral. */
+:root {
+  --paper: #f5f7f4;
+  --surface: #ffffff;
+  --sunken: #eaefea;
+  --ink: #12201b;
+  --muted: #56645d;
+  --line: #d7dfd9;
+  --emerald: #0d5a48;
+  --emerald-strong: #08443a;
+  --emerald-soft: #dcebe4;
+  --brass: #b88a24;
+  --brass-soft: #f3e7c6;
+  --on-emerald: #f5f7f4;
+  color-scheme: light;
+}
+
+.dark {
+  --paper: #0b1613;
+  --surface: #11211c;
+  --sunken: #0e1b17;
+  --ink: #e6eee9;
+  --muted: #9aaba3;
+  --line: #22362f;
+  --emerald: #5cbf9f;
+  --emerald-strong: #7ad3b5;
+  --emerald-soft: #163a30;
+  --brass: #e0bd63;
+  --brass-soft: #3a3016;
+  --on-emerald: #08130f;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-emerald: var(--emerald);
+  --color-emerald-strong: var(--emerald-strong);
+  --color-emerald-soft: var(--emerald-soft);
+  --color-brass: var(--brass);
+  --color-brass-soft: var(--brass-soft);
+  --color-on-emerald: var(--on-emerald);
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: "Amiri", "Scheherazade New", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01";
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+::selection {
+  background: var(--brass-soft);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Bingkai lengkung mihrab — motif utama situs */
+.arch {
+  border-radius: 999px 999px 18px 18px / 46% 46% 18px 18px;
+  overflow: hidden;
+}
+.arch-sm {
+  border-radius: 999px 999px 12px 12px / 38% 38% 12px 12px;
+  overflow: hidden;
+}
+
+/* Pola bintang delapan (rub el hizb) sebagai tekstur latar */
+.girih {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23b88a24' stroke-width='1'%3E%3Crect x='16' y='16' width='24' height='24'/%3E%3Crect x='16' y='16' width='24' height='24' transform='rotate(45 28 28)'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 56px 56px;
+}
+
+.hero-rise {
+  animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-rise-late {
+  animation: rise 0.9s 0.18s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Isi artikel ---------- */
+.prose-asa {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--ink);
+  max-width: 68ch;
+}
+.prose-asa > * + * {
+  margin-top: 1.1em;
+}
+.prose-asa h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 1.8em;
+  letter-spacing: -0.01em;
+}
+.prose-asa h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 1.5em;
+}
+.prose-asa a {
+  color: var(--emerald);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-asa ul {
+  list-style: disc;
+  padding-left: 1.4em;
+}
+.prose-asa ol {
+  list-style: decimal;
+  padding-left: 1.4em;
+}
+.prose-asa blockquote {
+  border-left: 3px solid var(--brass);
+  padding-left: 1em;
+  color: var(--muted);
+  font-style: italic;
+}
+.prose-asa img {
+  border-radius: 14px;
+  width: 100%;
+  height: auto;
+}
+.prose-asa figure {
+  margin-block: 1.6em;
+}
+.prose-asa figcaption {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.5em;
+}
+.prose-asa iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border-radius: 14px;
+}
+
+/* Editor Tiptap */
+.tiptap {
+  min-height: 360px;
+  outline: none;
+}
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--muted);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ---------- Komponen admin ---------- */
+@layer components {
+  .input {
+    @apply block w-full rounded-xl border border-line bg-surface px-3.5 py-2.5 text-[15px] text-ink outline-none transition-colors placeholder:text-muted/70 focus:border-emerald focus:ring-2 focus:ring-emerald/20;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-emerald px-5 py-2.5 text-sm font-semibold text-on-emerald transition-colors hover:bg-emerald-strong disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line px-4 py-2 text-sm font-semibold transition-colors hover:border-emerald hover:text-emerald disabled:opacity-50;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-red-500/40 px-4 py-2 text-sm font-semibold text-red-600 transition-colors hover:bg-red-500/10 dark:text-red-300;
+  }
+  .panel {
+    @apply rounded-2xl border border-line bg-surface p-5 sm:p-6;
+  }
+}
