@@ -5,7 +5,13 @@ import { ExternalLink, Save, Send, Trash2 } from "lucide-react";
 import { deletePost, savePost, type ActionResult, type PostInput } from "@/app/admin/actions";
 import { slugify } from "@/lib/format";
 import { Field, ImageField, Notice, TextArea } from "./fields";
-import { RichText } from "./rich-text";
+import dynamic from "next/dynamic";
+
+// Editor teks kaya cukup besar — dimuat terpisah agar halaman artikel terbuka lebih cepat.
+const RichText = dynamic(() => import("./rich-text").then((m) => m.RichText), {
+  ssr: false,
+  loading: () => <div className="h-[420px] animate-pulse rounded-xl border border-line bg-sunken" />,
+});
 
 function toLocalInput(iso: string | null) {
   if (!iso) return "";

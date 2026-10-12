@@ -18,9 +18,9 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // getClaims juga menyegarkan sesi yang kedaluwarsa, tanpa memanggil server Auth bila tidak perlu.
+  const { data } = await supabase.auth.getClaims();
+  const user = data?.claims?.sub;
 
   const isLogin = request.nextUrl.pathname === "/admin/login";
   if (!user && !isLogin) {
