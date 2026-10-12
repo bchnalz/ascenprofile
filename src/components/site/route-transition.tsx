@@ -1,12 +1,14 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { StarMark } from "./icons";
 
-const LEAVE_MS = 220;
+const LEAVE_MS = 340;
 
 /**
- * Transisi antar halaman: konten memudar keluar, bilah progres kuningan berjalan
- * di atas, lalu halaman baru memudar masuk (lihat template.tsx).
+ * Transisi antar halaman: konten memudar & bergeser keluar, tirai lembut dengan
+ * bintang kuningan menutup sebentar, bilah progres berjalan di atas, lalu halaman
+ * baru masuk dari bawah (lihat template.tsx).
  */
 export function RouteTransition() {
   const router = useRouter();
@@ -16,21 +18,16 @@ export function RouteTransition() {
   const target = useRef<string | null>(null);
 
   useEffect(() => {
-    const reduce = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
     const go = (href: string) => {
       const url = new URL(href, window.location.href);
       if (url.pathname === window.location.pathname && url.search === window.location.search) return;
       target.current = url.pathname + url.search;
-      if (reduce()) {
-        router.push(target.current);
-        return;
-      }
+      router.prefetch(target.current);
       setState("leaving");
       document.documentElement.dataset.leaving = "true";
       setTimeout(() => {
         setState("loading");
-        router.push(target.current!);
+        router.push(target.current!, { scroll: false });
       }, LEAVE_MS);
     };
 
@@ -63,12 +60,24 @@ export function RouteTransition() {
     setState("idle");
   }, [pathname, search]);
 
+  const busy = state !== "idle";
+
   return (
-    <div
-      aria-hidden
-      className={`pointer-events-none fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-brass transition-[transform,opacity] ease-out ${
-        state === "idle" ? "scale-x-100 opacity-0 duration-500" : state === "leaving" ? "scale-x-[0.35] opacity-100 duration-200" : "scale-x-[0.85] opacity-100 duration-[3000ms]"
-      }`}
-    />
+    <>
+      <div
+        aria-hidden
+        className={`pointer-events-none fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-brass transition-[transform,opacity] ease-out ${
+          state === "idle" ? "scale-x-100 opacity-0 duration-500" : state === "leaving" ? "scale-x-[0.4] opacity-100 duration-300" : "scale-x-[0.9] opacity-100 duration-[3000ms]"
+        }`}
+      />
+      <div
+        aria-hidden
+        className={`pointer-events-none fixed inset-x-0 bottom-0 top-[72px] z-30 flex items-center justify-center bg-paper transition-opacity ${
+          busy ? "opacity-100 duration-300" : "opacity-0 duration-500"
+        }`}
+      >
+        <StarMark className={`size-9 text-brass transition-transform duration-700 ${busy ? "rotate-45 scale-100" : "rotate-0 scale-75"}`} />
+      </div>
+    </>
   );
 }
