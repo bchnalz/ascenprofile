@@ -94,7 +94,9 @@ export function Footer({ contact }: { contact: ContactInfo }) {
       </div>
       <div className="relative border-t border-white/15 dark:border-line">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-sm opacity-75 sm:flex-row sm:justify-between sm:px-6">
-          <p>© {new Date().getFullYear()} {contact.schoolName}. Hak cipta dilindungi.</p>
+          <p>
+            © {new Date().getFullYear()} Natagassa Creative. Hak cipta dilindungi.
+          </p>
           <a href={contact.spmbUrl} className="hover:underline">
             Portal SPMB
           </a>

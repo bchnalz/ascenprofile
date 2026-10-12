@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   },
   description:
     "SMP Asa Cendekia Sedati, Sidoarjo: sekolah Islam terakreditasi A yang menyeimbangkan pendidikan agama dan pendidikan umum. Berimtaq, beriptek, dan berprestasi.",
+  authors: [{ name: "Natagassa Creative" }],
+  creator: "Natagassa Creative",
   openGraph: { type: "website", locale: "id_ID", siteName: "SMP Asa Cendekia Sedati" },
   icons: { icon: "/favicon.ico" },
 };
