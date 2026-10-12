@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { navigation } from "@/content/profile";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { lockScroll } from "@/lib/scroll";
 
 type Props = { logo: string; schoolName: string; spmbUrl: string };
 
@@ -21,7 +22,9 @@ export function Header({ logo, schoolName, spmbUrl }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    lockScroll(true);
+    return () => lockScroll(false);
   }, [open]);
 
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href.split("/").slice(0, 2).join("/")));
@@ -46,16 +49,16 @@ export function Header({ logo, schoolName, spmbUrl }: Props) {
           {navigation.map((item) =>
             item.children ? (
               <div key={item.label} className="group relative">
-                <button
-                  type="button"
+                <Link
+                  href={item.href}
                   className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-[15px] font-medium transition-colors hover:text-emerald ${
-                    isActive("/profil") || pathname.startsWith("/fasilitas") ? "text-emerald" : ""
+                    item.href === "/" ? (pathname === "/" ? "text-emerald" : "") : item.children.some((c) => pathname === c.href) ? "text-emerald" : ""
                   }`}
                   aria-haspopup="true"
                 >
                   {item.label}
                   <ChevronDown className="size-4 transition-transform group-focus-within:rotate-180 group-hover:rotate-180" />
-                </button>
+                </Link>
                 <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
                   <ul className="w-56 rounded-2xl border border-line bg-surface p-2 shadow-[0_18px_40px_-20px_rgba(8,40,30,0.35)]">
                     {item.children.map((c) => (
@@ -63,6 +66,7 @@ export function Header({ logo, schoolName, spmbUrl }: Props) {
                         <Link
                           href={c.href}
                           className={`block rounded-xl px-3 py-2.5 text-sm transition-colors hover:bg-emerald-soft ${pathname === c.href ? "font-semibold text-emerald" : ""}`}
+                          onClick={(e) => (e.currentTarget as HTMLElement).blur()}
                         >
                           {c.label}
                         </Link>
@@ -104,13 +108,22 @@ export function Header({ logo, schoolName, spmbUrl }: Props) {
       </div>
 
       {open && (
-        <nav className="h-[calc(100dvh-72px)] overflow-y-auto border-t border-line bg-paper px-4 pb-10 pt-4 lg:hidden" aria-label="Navigasi seluler">
+        <nav
+          className="h-[calc(100dvh-72px)] overflow-y-auto border-t border-line bg-paper px-4 pb-10 pt-4 lg:hidden"
+          aria-label="Navigasi seluler"
+          data-lenis-prevent
+          onClick={(e) => {
+            if ((e.target as HTMLElement).closest("a")) setOpen(false);
+          }}
+        >
           <ul className="space-y-1">
             {navigation.map((item) => (
               <li key={item.label}>
                 {item.children ? (
                   <>
-                    <p className="px-3 pb-1 pt-4 text-sm text-muted">{item.label}</p>
+                    <Link href={item.href} className="block px-3 pb-1 pt-4 text-sm text-muted">
+                      {item.label}
+                    </Link>
                     <ul>
                       {item.children.map((c) => (
                         <li key={c.href}>

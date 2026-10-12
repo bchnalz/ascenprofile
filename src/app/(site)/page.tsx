@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { getHome, getPosts } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 import { PostCard } from "@/components/site/post-card";
-import { VideoEmbed } from "@/components/site/video-embed";
+import { HeroVideo } from "@/components/site/hero-video";
 import { featureIcons, StarMark } from "@/components/site/icons";
 
 export const revalidate = 60;
@@ -27,50 +27,35 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ---------- Hero ---------- */}
-      <section className="relative overflow-hidden">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-10 sm:px-6 md:grid-cols-[1.1fr_0.9fr] md:pt-16 lg:gap-16">
-          <div className="hero-rise">
-            <p className="flex items-center gap-2 text-[15px] font-medium text-emerald">
-              <StarMark className="size-4 text-brass" />
+      {/* ---------- Hero: video profil diputar otomatis ---------- */}
+      <section id="video-profil" aria-label="Video profil sekolah" className="relative isolate flex min-h-[min(calc(100svh-72px),860px)] items-end overflow-hidden text-white">
+        <HeroVideo youtubeId={home.video.youtubeId} mp4Url={home.video.mp4Url} poster={home.hero.image} title={home.video.title} />
+        <div className="girih pointer-events-none absolute inset-0 opacity-[0.06] [mask-image:linear-gradient(to_top,black,transparent_70%)]" aria-hidden />
+        <div className="relative mx-auto w-full max-w-6xl px-4 pb-28 pt-24 sm:px-6 sm:pb-24">
+          <div className="hero-rise max-w-3xl">
+            <p className="flex items-center gap-2 text-[15px] font-medium text-[#f0d488]">
+              <StarMark className="size-4" />
               {home.hero.kicker}
             </p>
-            <h1 className="mt-6 text-[2.9rem] font-extrabold leading-[1.02] tracking-[-0.035em] text-balance sm:text-6xl lg:text-[4.6rem]">
+            <h1 className="mt-5 text-[2.8rem] font-extrabold leading-[1.02] tracking-[-0.035em] text-balance drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)] sm:text-6xl lg:text-[4.9rem]">
               {home.hero.title}
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">{home.hero.subtitle}</p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <SmartLink
-                href={home.hero.primaryHref}
-                className="inline-flex items-center gap-2 rounded-full bg-emerald px-6 py-3.5 font-semibold text-on-emerald transition-colors hover:bg-emerald-strong"
-              >
-                {home.hero.primaryLabel}
-                <ArrowUpRight className="size-4" />
-              </SmartLink>
-              <SmartLink
-                href={home.hero.secondaryHref}
-                className="inline-flex items-center rounded-full border border-line px-6 py-3.5 font-semibold transition-colors hover:border-emerald hover:text-emerald"
-              >
-                {home.hero.secondaryLabel}
-              </SmartLink>
-            </div>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/85">{home.hero.subtitle}</p>
           </div>
-
-          <div className="hero-rise-late relative mx-auto w-full max-w-[440px]">
-            <div className="arch absolute inset-0 translate-x-4 translate-y-4 border-2 border-brass/60" aria-hidden />
-            <div className="arch relative aspect-[4/5] bg-sunken">
-              {home.hero.image && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={home.hero.image} alt={home.hero.imageAlt} className="size-full object-cover" fetchPriority="high" />
-              )}
-            </div>
-            <div className="absolute -left-4 bottom-10 flex items-center gap-3 rounded-2xl border border-line bg-surface px-4 py-3 shadow-[0_20px_40px_-24px_rgba(8,40,30,0.5)] sm:-left-10">
-              <span className="flex size-11 items-center justify-center rounded-full bg-brass-soft font-extrabold text-brass">A</span>
-              <span className="text-sm leading-tight">
-                <span className="block font-bold">Terakreditasi A</span>
-                <span className="text-muted">Sedati, Sidoarjo</span>
-              </span>
-            </div>
+          <div className="hero-rise-late mt-9 flex flex-wrap gap-3">
+            <SmartLink
+              href={home.hero.primaryHref}
+              className="inline-flex items-center gap-2 rounded-full bg-[#f0d488] px-6 py-3.5 font-semibold text-[#0b2b23] transition-colors hover:bg-white"
+            >
+              {home.hero.primaryLabel}
+              <ArrowUpRight className="size-4" />
+            </SmartLink>
+            <SmartLink
+              href={home.hero.secondaryHref}
+              className="inline-flex items-center rounded-full border border-white/40 px-6 py-3.5 font-semibold backdrop-blur-sm transition-colors hover:bg-white/10"
+            >
+              {home.hero.secondaryLabel}
+            </SmartLink>
           </div>
         </div>
       </section>
@@ -91,7 +76,7 @@ export default async function HomePage() {
       </section>
 
       {/* ---------- Sambutan ---------- */}
-      <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+      <section id="sambutan" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
         <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
           <div>
             <p className="font-arabic text-4xl leading-loose text-brass sm:text-5xl" lang="ar" dir="rtl">
@@ -117,7 +102,7 @@ export default async function HomePage() {
       </section>
 
       {/* ---------- Selayang pandang ---------- */}
-      <section className="bg-emerald-soft/60 dark:bg-surface">
+      <section id="profil" className="bg-emerald-soft/60 dark:bg-surface">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-24 sm:px-6 md:grid-cols-2 md:gap-16">
           <div className="arch-sm aspect-[5/6] max-w-md bg-sunken">
             {home.about.image && (
@@ -149,7 +134,7 @@ export default async function HomePage() {
       </section>
 
       {/* ---------- Keunggulan ---------- */}
-      <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+      <section id="keunggulan" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
         <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">Mengapa memilih SMP Asa Cendekia</h2>
         <ul className="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2">
           {home.strengths.map((s) => {
@@ -171,7 +156,7 @@ export default async function HomePage() {
 
       {/* ---------- Berita ---------- */}
       {lead && (
-        <section className="border-t border-line">
+        <section id="berita" className="border-t border-line">
           <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Berita terbaru</h2>
@@ -205,23 +190,9 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ---------- Video profil ---------- */}
-      {home.video.youtubeId && (
-        <section id="video-profil" className="relative scroll-mt-20 overflow-hidden bg-emerald-strong text-[#eef4f0] dark:bg-surface dark:text-ink">
-          <div className="girih pointer-events-none absolute inset-0 opacity-[0.07]" aria-hidden />
-          <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-24 sm:px-6 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">{home.video.title}</h2>
-              <p className="mt-5 max-w-md leading-relaxed opacity-80">{home.video.text}</p>
-            </div>
-            <VideoEmbed youtubeId={home.video.youtubeId} title={home.video.title} />
-          </div>
-        </section>
-      )}
-
       {/* ---------- Testimoni ---------- */}
       {home.testimonials.length > 0 && (
-        <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+        <section id="testimoni" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
           <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Kata alumni</h2>
           <ul className="mt-12 grid gap-10 md:grid-cols-3">
             {home.testimonials.map((t, i) => (

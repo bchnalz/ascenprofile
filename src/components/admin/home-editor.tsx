@@ -4,7 +4,7 @@ import { Save } from "lucide-react";
 import type { HomeContent } from "@/lib/types";
 import { saveSetting, type ActionResult } from "@/app/admin/actions";
 import { featureIconNames } from "@/components/site/icons";
-import { Field, ImageField, Notice, Repeater, Section, TextArea } from "./fields";
+import { Field, ImageField, Notice, Repeater, Section, TextArea, VideoField } from "./fields";
 
 const toParas = (s: string) => s.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
 const fromParas = (p: string[]) => p.join("\n\n");
@@ -30,11 +30,11 @@ export function HomeEditor({ initial }: { initial: HomeContent }) {
 
   return (
     <div className="space-y-6">
-      <Section title="Hero" description="Bagian paling atas beranda.">
+      <Section title="Hero" description="Bagian paling atas beranda, tampil di atas video profil.">
         <Field label="Kalimat pembuka kecil" value={home.hero.kicker} onChange={(v) => set("hero", { kicker: v })} />
         <Field label="Judul utama" value={home.hero.title} onChange={(v) => set("hero", { title: v })} />
         <TextArea label="Deskripsi" rows={3} value={home.hero.subtitle} onChange={(v) => set("hero", { subtitle: v })} />
-        <ImageField label="Foto hero" folder="home" aspect="aspect-[4/5]" value={home.hero.image} onChange={(v) => set("hero", { image: v })} />
+        <ImageField label="Foto hero (gambar sementara sebelum video diputar)" folder="home" aspect="aspect-video" value={home.hero.image} onChange={(v) => set("hero", { image: v })} />
         <Field label="Teks alternatif foto" value={home.hero.imageAlt} onChange={(v) => set("hero", { imageAlt: v })} hint="Deskripsi singkat foto untuk pembaca layar." />
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Tombol utama — teks" value={home.hero.primaryLabel} onChange={(v) => set("hero", { primaryLabel: v })} />
@@ -121,18 +121,24 @@ export function HomeEditor({ initial }: { initial: HomeContent }) {
         />
       </Section>
 
-      <Section title="Video profil">
-        <Field label="Judul" value={home.video.title} onChange={(v) => set("video", { title: v })} />
-        <TextArea label="Keterangan" rows={3} value={home.video.text} onChange={(v) => set("video", { text: v })} />
+      <Section title="Video profil" description="Diputar otomatis tanpa suara sebagai latar hero saat website dibuka. Pengunjung bisa menyalakan suara.">
+        <Field label="Judul video" value={home.video.title} onChange={(v) => set("video", { title: v })} />
         <Field
-          label="ID atau tautan YouTube"
+          label="Tautan YouTube"
           value={home.video.youtubeId}
           onChange={(v) => {
             const m = v.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/);
             set("video", { youtubeId: m ? m[1] : v.trim() });
           }}
-          hint="Tempel tautan YouTube; ID videonya diambil otomatis. Kosongkan untuk menyembunyikan bagian ini."
+          hint="Tempel tautan YouTube; ID videonya diambil otomatis."
         />
+        <VideoField
+          label="Atau unggah file video (MP4, disarankan)"
+          value={home.video.mp4Url}
+          onChange={(v) => set("video", { mp4Url: v })}
+          hint="Jika diisi, MP4 dipakai menggantikan YouTube — tampil lebih bersih tanpa logo YouTube. Ukuran ideal: 1920×1080, durasi 30–60 detik, maksimal 50 MB."
+        />
+        <p className="text-xs text-muted">Foto hero di atas dipakai sebagai gambar sementara sebelum video mulai diputar.</p>
       </Section>
 
       <Section title="Testimoni alumni">

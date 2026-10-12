@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileText, Home, Phone, Plus } from "lucide-react";
+import { FileText, Home, Megaphone, Phone, Plus } from "lucide-react";
 import { requireAdmin } from "@/lib/auth";
 import { formatDate } from "@/lib/format";
 
@@ -32,10 +32,11 @@ export default async function Dashboard() {
         </div>
       </dl>
 
-      <div className="mt-8 grid gap-4 md:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {[
           { href: "/admin/beranda", icon: Home, title: "Konten beranda", text: "Hero, sambutan, keunggulan, video, testimoni, dan logo mitra." },
           { href: "/admin/artikel", icon: FileText, title: "Artikel", text: "Tulis, sunting, terbitkan, atau hapus berita." },
+          { href: "/admin/promo", icon: Megaphone, title: "Popup promo", text: "Unggah iklan/pengumuman 1080×1350 px yang muncul saat website dibuka." },
           { href: "/admin/kontak", icon: Phone, title: "Kontak & identitas", text: "Logo, alamat, nomor telepon, peta, dan media sosial." },
         ].map(({ href, icon: Icon, title, text }) => (
           <Link key={href} href={href} className="panel transition-colors hover:border-emerald">

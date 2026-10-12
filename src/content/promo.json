@@ -1,0 +1,6 @@
+{
+  "enabled": false,
+  "frequency": "session",
+  "delaySeconds": 1,
+  "items": []
+}

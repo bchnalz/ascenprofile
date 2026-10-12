@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ExternalLink, FileText, Home, LayoutDashboard, LogOut, Phone } from "lucide-react";
+import { ExternalLink, FileText, Home, LayoutDashboard, LogOut, Megaphone, Phone } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { signOut } from "@/app/admin/actions";
 
@@ -9,6 +9,7 @@ const links = [
   { href: "/admin", label: "Ringkasan", icon: LayoutDashboard },
   { href: "/admin/beranda", label: "Konten beranda", icon: Home },
   { href: "/admin/artikel", label: "Artikel", icon: FileText },
+  { href: "/admin/promo", label: "Popup promo", icon: Megaphone },
   { href: "/admin/kontak", label: "Kontak & identitas", icon: Phone },
 ];
 

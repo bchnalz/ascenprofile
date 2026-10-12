@@ -12,13 +12,15 @@ const arr = (a) => `array[${a.map(q).join(", ")}]::text[]`;
 const home = read("home.json");
 const contact = read("contact.json");
 const posts = read("posts.json");
+const promo = read("promo.json");
 
 let sql = `-- Konten awal SMP Asa Cendekia (dibuat otomatis oleh scripts/generate-seed.mjs).
 -- Aman dijalankan ulang: konten yang sudah ada TIDAK ditimpa.
 
 insert into public.site_settings (key, value) values
   ('home', ${q(JSON.stringify(home))}::jsonb),
-  ('contact', ${q(JSON.stringify(contact))}::jsonb)
+  ('contact', ${q(JSON.stringify(contact))}::jsonb),
+  ('promo', ${q(JSON.stringify(promo))}::jsonb)
 on conflict (key) do nothing;
 
 insert into public.posts (slug, title, excerpt, content, cover_url, tags, status, published_at) values

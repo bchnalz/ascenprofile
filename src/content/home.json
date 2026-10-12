@@ -7,14 +7,26 @@
     "imageAlt": "Siswa SMP Asa Cendekia di SPASCAFEST 3.0",
     "primaryLabel": "Daftar SPMB",
     "primaryHref": "https://spmb.smpasacendekia.sch.id",
-    "secondaryLabel": "Tonton video profil",
-    "secondaryHref": "#video-profil"
+    "secondaryLabel": "Kenali sekolah kami",
+    "secondaryHref": "/#profil"
   },
   "values": [
-    { "title": "Akreditasi A", "text": "Mencerminkan kualitas pendidikan yang tinggi." },
-    { "title": "Cendekia", "text": "Menekankan aspek intelektual dan kecerdasan." },
-    { "title": "Religius", "text": "Menggarisbawahi nilai-nilai keislaman yang diterapkan." },
-    { "title": "Kompeten", "text": "Menggambarkan profesionalisme tenaga pengajar dan manajemen sekolah." }
+    {
+      "title": "Akreditasi A",
+      "text": "Mencerminkan kualitas pendidikan yang tinggi."
+    },
+    {
+      "title": "Cendekia",
+      "text": "Menekankan aspek intelektual dan kecerdasan."
+    },
+    {
+      "title": "Religius",
+      "text": "Menggarisbawahi nilai-nilai keislaman yang diterapkan."
+    },
+    {
+      "title": "Kompeten",
+      "text": "Menggambarkan profesionalisme tenaga pengajar dan manajemen sekolah."
+    }
   ],
   "welcome": {
     "heading": "Sambutan Kepala Sekolah",
@@ -36,32 +48,82 @@
     "image": "https://smpasacendekia.sch.id/wp-content/uploads/2024/08/lomba-hari-pertama.jpg",
     "imageAlt": "Kegiatan lomba HUT RI di SMP Asa Cendekia",
     "stats": [
-      { "value": "2011", "label": "Tahun berdiri" },
-      { "value": "A", "label": "Akreditasi" },
-      { "value": "14+", "label": "Ekstrakurikuler" }
+      {
+        "value": "2011",
+        "label": "Tahun berdiri"
+      },
+      {
+        "value": "A",
+        "label": "Akreditasi"
+      },
+      {
+        "value": "14+",
+        "label": "Ekstrakurikuler"
+      }
     ]
   },
   "strengths": [
-    { "icon": "mosque", "title": "Lingkungan pembelajaran Islami", "text": "Menyediakan suasana belajar yang kondusif dengan penanaman nilai-nilai Islam dalam setiap aspek kegiatan sekolah." },
-    { "icon": "heart", "title": "Pembinaan karakter", "text": "Fokus pada pengembangan karakter siswa melalui program-program khusus yang dirancang untuk memperkuat moral dan etika." },
-    { "icon": "sparkles", "title": "Ekstrakurikuler beragam", "text": "Menawarkan berbagai kegiatan ekstrakurikuler untuk mengembangkan bakat dan minat siswa di luar akademik." },
-    { "icon": "cpu", "title": "Dukungan teknologi", "text": "Memanfaatkan teknologi dalam proses pembelajaran, termasuk akses internet dan fasilitas multimedia yang menunjang pendidikan modern." }
+    {
+      "icon": "mosque",
+      "title": "Lingkungan pembelajaran Islami",
+      "text": "Menyediakan suasana belajar yang kondusif dengan penanaman nilai-nilai Islam dalam setiap aspek kegiatan sekolah."
+    },
+    {
+      "icon": "heart",
+      "title": "Pembinaan karakter",
+      "text": "Fokus pada pengembangan karakter siswa melalui program-program khusus yang dirancang untuk memperkuat moral dan etika."
+    },
+    {
+      "icon": "sparkles",
+      "title": "Ekstrakurikuler beragam",
+      "text": "Menawarkan berbagai kegiatan ekstrakurikuler untuk mengembangkan bakat dan minat siswa di luar akademik."
+    },
+    {
+      "icon": "cpu",
+      "title": "Dukungan teknologi",
+      "text": "Memanfaatkan teknologi dalam proses pembelajaran, termasuk akses internet dan fasilitas multimedia yang menunjang pendidikan modern."
+    }
   ],
   "video": {
     "title": "Video profil SMP Asa Cendekia",
     "text": "Jelajahi setiap sudut SMP Asa Cendekia Sedati melalui video profil kami dan kenali lebih dekat suasana belajar yang kami tawarkan.",
-    "youtubeId": "yQhnSkfZ9rI"
+    "youtubeId": "yQhnSkfZ9rI",
+    "mp4Url": ""
   },
   "testimonials": [
-    { "quote": "SMP Asa Cendekia Sedati telah memberikan saya fondasi pendidikan yang kuat dan nilai-nilai yang mendalam. Terima kasih, SMP Asa Cendekia Sedati!", "name": "Alumni", "role": "Lulusan SMP Asa Cendekia" },
-    { "quote": "Pengalaman saya di SMP Asa Cendekia Sedati sangat berkesan. Guru-gurunya sangat peduli dan mendukung perkembangan kami secara holistik.", "name": "Alumni", "role": "Lulusan SMP Asa Cendekia" },
-    { "quote": "Setelah lulus dari SMP Asa Cendekia Sedati, saya merasa siap menghadapi tantangan di pendidikan lanjutan dan kehidupan.", "name": "Alumni", "role": "Lulusan SMP Asa Cendekia" }
+    {
+      "quote": "SMP Asa Cendekia Sedati telah memberikan saya fondasi pendidikan yang kuat dan nilai-nilai yang mendalam. Terima kasih, SMP Asa Cendekia Sedati!",
+      "name": "Alumni",
+      "role": "Lulusan SMP Asa Cendekia"
+    },
+    {
+      "quote": "Pengalaman saya di SMP Asa Cendekia Sedati sangat berkesan. Guru-gurunya sangat peduli dan mendukung perkembangan kami secara holistik.",
+      "name": "Alumni",
+      "role": "Lulusan SMP Asa Cendekia"
+    },
+    {
+      "quote": "Setelah lulus dari SMP Asa Cendekia Sedati, saya merasa siap menghadapi tantangan di pendidikan lanjutan dan kehidupan.",
+      "name": "Alumni",
+      "role": "Lulusan SMP Asa Cendekia"
+    }
   ],
   "partners": [
-    { "name": "Kurikulum Merdeka", "image": "https://smpasacendekia.sch.id/wp-content/uploads/2024/08/kurkum-1.png" },
-    { "name": "Merdeka Belajar", "image": "https://smpasacendekia.sch.id/wp-content/uploads/2024/08/merdeka-belajar.png" },
-    { "name": "Kementerian Agama", "image": "https://smpasacendekia.sch.id/wp-content/uploads/2024/08/kemenag.png" },
-    { "name": "Mitra pendidikan", "image": "https://smpasacendekia.sch.id/wp-content/uploads/2024/08/83790f2b43f00be.png" }
+    {
+      "name": "Kurikulum Merdeka",
+      "image": "https://smpasacendekia.sch.id/wp-content/uploads/2024/08/kurkum-1.png"
+    },
+    {
+      "name": "Merdeka Belajar",
+      "image": "https://smpasacendekia.sch.id/wp-content/uploads/2024/08/merdeka-belajar.png"
+    },
+    {
+      "name": "Kementerian Agama",
+      "image": "https://smpasacendekia.sch.id/wp-content/uploads/2024/08/kemenag.png"
+    },
+    {
+      "name": "Mitra pendidikan",
+      "image": "https://smpasacendekia.sch.id/wp-content/uploads/2024/08/83790f2b43f00be.png"
+    }
   ],
   "cta": {
     "heading": "Berminat untuk bergabung?",

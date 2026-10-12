@@ -207,7 +207,18 @@ export const extracurriculars: Extracurricular[] = [
 ];
 
 export const navigation = [
-  { label: "Beranda", href: "/" },
+  {
+    label: "Beranda",
+    href: "/",
+    children: [
+      { label: "Video profil", href: "/#video-profil" },
+      { label: "Sambutan", href: "/#sambutan" },
+      { label: "Selayang pandang", href: "/#profil" },
+      { label: "Keunggulan", href: "/#keunggulan" },
+      { label: "Berita terbaru", href: "/#berita" },
+      { label: "Kata alumni", href: "/#testimoni" },
+    ],
+  },
   {
     label: "Profil",
     href: "/profil/sejarah",

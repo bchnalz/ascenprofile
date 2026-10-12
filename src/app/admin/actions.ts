@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
 import { cleanHtml, slugify } from "@/lib/format";
 import type { ContactInfo, HomeContent } from "@/lib/types";
+import type { PromoSettings } from "@/lib/promo";
 import { createSessionClient } from "@/lib/supabase/server";
 
 export type ActionResult = { ok: true; message: string; id?: string } | { ok: false; message: string };
@@ -12,7 +13,7 @@ function refreshPublic() {
   revalidatePath("/", "layout");
 }
 
-export async function saveSetting(key: "home" | "contact", value: HomeContent | ContactInfo): Promise<ActionResult> {
+export async function saveSetting(key: "home" | "contact" | "promo", value: HomeContent | ContactInfo | PromoSettings): Promise<ActionResult> {
   const { supabase } = await requireAdmin();
   const { error } = await supabase.from("site_settings").upsert({ key, value });
   if (error) return { ok: false, message: `Gagal menyimpan: ${error.message}` };

@@ -1,5 +1,7 @@
 import "server-only";
 import seedPosts from "@/content/posts.json";
+import promoDefaults from "@/content/promo.json";
+import type { PromoSettings } from "./promo";
 import { createPublicClient } from "./supabase/server";
 import { isSupabaseConfigured } from "./supabase/env";
 import { contactDefaults, homeDefaults, type ContactInfo, type HomeContent, type Post, type PostSummary } from "./types";
@@ -32,6 +34,7 @@ async function getSetting<T>(key: string, defaults: T): Promise<T> {
 
 export const getHome = () => getSetting<HomeContent>("home", homeDefaults);
 export const getContact = () => getSetting<ContactInfo>("contact", contactDefaults);
+export const getPromo = () => getSetting<PromoSettings>("promo", promoDefaults as PromoSettings);
 
 // ---------- Artikel ----------
 

@@ -6,9 +6,13 @@ Website profil sekolah (Next.js 15 + Supabase) dengan mode gelap/terang dan pane
 
 - **Halaman publik**: beranda, sejarah, visi & misi, struktur organisasi, fasilitas, 14 ekstrakurikuler, prestasi, berita (dengan tag & halaman), kontak + peta.
 - **Mode gelap/terang** otomatis mengikuti perangkat, bisa diganti lewat tombol di header.
+- **Video profil diputar otomatis** sebagai latar hero (tanpa suara sesuai aturan peramban; ada tombol nyalakan suara & jeda). Bisa dari YouTube atau file MP4 yang diunggah.
+- **Layar pembuka (splash)** sekali per kunjungan, **transisi halus antarhalaman**, **guliran halus** (Lenis), dan tautan ke bagian beranda (`/#sambutan`, `/#berita`, …) dari halaman mana pun.
+- **Popup promo**: unggah gambar promo berukuran baku **1080 × 1350 px** (potret 4:5, PNG/JPG/WebP, maks. 2 MB), atur jadwal tampil, tautan, tombol, dan frekuensi. Bisa lebih dari satu promo (digeser), dan selalu bisa ditutup.
 - **Panel admin** (`/admin`):
   - *Konten beranda* — hero, nilai sekolah, sambutan, selayang pandang, keunggulan, video, testimoni, logo mitra, ajakan SPMB.
   - *Artikel* — tulis/sunting dengan editor teks kaya, unggah gambar, sampul, tag, draf/terbit, jadwal tanggal, hapus.
+  - *Popup promo* — gambar 1080 × 1350 px, jadwal mulai/berhenti, tautan, frekuensi tampil.
   - *Kontak & identitas* — logo, alamat, telepon, WhatsApp, peta, media sosial.
 - Tautan lama WordPress (mis. `/sejarah-sekolah/`, `/pramuka/`, slug artikel lama) dialihkan otomatis ke alamat baru.
 - Website tetap tampil walau Supabase belum disetel (memakai konten bawaan di `src/content`).
@@ -18,6 +22,8 @@ Website profil sekolah (Next.js 15 + Supabase) dengan mode gelap/terang dan pane
 ### 1. Supabase
 1. Buat project di [supabase.com](https://supabase.com).
 2. Buka **SQL Editor**, jalankan isi `supabase/schema.sql`, lalu `supabase/seed.sql`.
+   (Sudah pernah menjalankan seed sebelumnya? Jalankan ulang `seed.sql` saja — baris promo akan ditambahkan, konten lain tidak ditimpa.)
+   Untuk unggah video MP4 hingga 50 MB, pastikan batas ukuran file di **Storage → Settings** minimal 50 MB.
 3. **Authentication → Users → Add user**: buat akun admin (email + password, centang *Auto confirm*).
 4. Jadikan akun itu admin (SQL Editor):
    ```sql

@@ -202,3 +202,54 @@ export function Notice({ result }: { result: { ok: boolean; message: string } | 
     </p>
   );
 }
+
+export function VideoField({ label, value, onChange, hint }: { label: string; value: string; onChange: (v: string) => void; hint?: string }) {
+  const id = useId();
+  const input = useRef<HTMLInputElement>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+
+  async function onFile(file?: File) {
+    if (!file) return;
+    if (!file.type.startsWith("video/")) return setError("Pilih file video (MP4 atau WebM).");
+    if (file.size > 50 * 1024 * 1024) return setError("Ukuran video maksimal 50 MB. Kompres dulu, misalnya dengan HandBrake.");
+    setBusy(true);
+    setError("");
+    try {
+      onChange(await uploadImage(file, "video"));
+    } catch (e) {
+      setError(`Unggah gagal: ${(e as Error).message}`);
+    } finally {
+      setBusy(false);
+      if (input.current) input.current.value = "";
+    }
+  }
+
+  return (
+    <div>
+      <label htmlFor={id} className="text-sm font-medium">
+        {label}
+      </label>
+      {value && (
+        <video src={value} muted controls playsInline className="mt-1.5 aspect-video w-full max-w-md rounded-xl bg-black" />
+      )}
+      <div className="mt-2 space-y-2">
+        <input id={id} value={value} onChange={(e) => onChange(e.target.value)} placeholder="https://….mp4 atau unggah file" className="input" />
+        <div className="flex flex-wrap gap-2">
+          <button type="button" className="btn-ghost" onClick={() => input.current?.click()} disabled={busy}>
+            {busy ? <Loader2 className="size-4 animate-spin" /> : <ImagePlus className="size-4" />}
+            {busy ? "Mengunggah…" : "Unggah video"}
+          </button>
+          {value && (
+            <button type="button" className="btn-ghost" onClick={() => onChange("")}>
+              Hapus video
+            </button>
+          )}
+        </div>
+        {hint && <p className="text-xs text-muted">{hint}</p>}
+        {error && <p className="text-xs text-red-600 dark:text-red-300">{error}</p>}
+      </div>
+      <input ref={input} type="file" accept="video/mp4,video/webm" hidden onChange={(e) => onFile(e.target.files?.[0])} />
+    </div>
+  );
+}
